@@ -1,5 +1,4 @@
 from DataSource import DataSource
-from Exceptions import *
 import time
 
 class DekkoServer:
@@ -11,17 +10,19 @@ class DekkoServer:
         print(resp)
 
     def server_caught_error(self, arg):
-        """ Calls a method that generates a DriveException"""
         print(f" Calling DS with value {arg}")
 
         try:
             if self.datasource.server_caught_error(arg):
                 """ do_stuff(), we know the command succeeded since it returned true """
-
-
-
         except Exception as ex:
             print(f" Server caught an unexpected error with value {arg}. Exception raised: {ex}")
+
+    def server_burried_the_exception(self):
+        try:
+            self.datasource.generate_keyrror_exception()
+        except:
+            print("I burried the exception so you have no clue what actually happened. Don't thank me.")
 
     def builder_catches_random_exception(self):
         resp =  self.datasource.builder_catches_random_exception()
@@ -33,9 +34,11 @@ class DekkoServer:
     def generate_uncaught_exception(self, arg):
         self.datasource.uncaught_exception()
 
+    def server_uncaught_error(self):
+        time.sleep(1)                                       # just so we don't mess up all the display from previous caught exceptions
+        self.datasource.bar_raises_drive_not_initialized()
 
 if __name__ == '__main__':
-    import sys
 
     srv = DekkoServer()
 
@@ -60,4 +63,14 @@ if __name__ == '__main__':
     srv.builder_catches_random_exception()
     print("-----------------------")
 
+    """ DO NOT burry exception - this way the cause of the error won't bubble up."""
+    print("")
+    srv.server_burried_the_exception()
+    print("-----------------------")
+
+
+    """ And an uncaught exception to finish things nicely."""
+    print("")
+    srv.server_uncaught_error()
+    print("-----------------------")
 

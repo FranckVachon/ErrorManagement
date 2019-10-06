@@ -23,5 +23,9 @@ class DataSource:
         except Exception as ex:
             print(f" Unknown generic exception caught in datasource {ex}")
 
+    def generate_keyrror_exception(self):
+        d = dict()
+        print(d['unknown_key'])
+
     def uncaught_exception(self):
         raise Exception(" That didnt work out well... ")
