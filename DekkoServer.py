@@ -22,17 +22,15 @@ class DekkoServer:
         try:
             self.datasource.generate_keyrror_exception()
         except:
-            print("I burried the exception so you have no clue what actually happened. Don't thank me.")
+            print("I burried the exception so you have no clue what went wrong. Don't thank me.")
 
     def builder_catches_random_exception(self):
         resp =  self.datasource.builder_catches_random_exception()
-        print(resp)
+        print(f"Response from datasource: {resp}")
 
     def generate_straight_exception(self, arg):
         self.datasource.uncaught_exception()
 
-    def generate_uncaught_exception(self, arg):
-        self.datasource.uncaught_exception()
 
     def server_uncaught_error(self):
         time.sleep(1)                                       # just so we don't mess up all the display from previous caught exceptions
